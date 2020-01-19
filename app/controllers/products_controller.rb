@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       render :new
+    end
   end
 
   def edit
@@ -36,10 +37,11 @@ class ProductsController < ApplicationController
     end
   end
 
-    def destroy
-      @product = Product.find(params[:id].to_i)
-      @product.destroy
-      redirect_to products_path
+  def destroy
+    @product = Product.find(params[:id].to_i)
+    @product.destroy
+    redirect_to products_path
+  end
 
   private
   def product_params
