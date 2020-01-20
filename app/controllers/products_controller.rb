@@ -12,8 +12,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
+      flash[:notice] = "Product Successfully Created"
       redirect_to products_path
     else
+      flash[:notice] = "Product Creation Failed"
       render :new
     end
   end
@@ -31,8 +33,10 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id].to_i)
     if @product.update(product_params)
+      flash[:notice] = "Product Successfully Updated"
       redirect_to products_path
     else
+      flash[:notice] = "Product Failed to Update"
       render :edit
     end
   end
@@ -40,6 +44,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id].to_i)
     @product.destroy
+    flash[:notice] = "#{@product.name} was Deleted"
     redirect_to products_path
   end
 

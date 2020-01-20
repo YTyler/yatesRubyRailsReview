@@ -10,8 +10,10 @@ class ReviewsController < ApplicationController
     @product = Product.find(params[:product_id].to_i)
     @review = @product.reviews.new(review_params)
     if @review.save
+      flash[:notice] = "Review Successfully Created"
       redirect_to product_path(@product)
     else
+      flash[:notice] = "Review Creation Failed"
       render :new
     end
   end
@@ -30,8 +32,10 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
+      flash[:notice] = "Review Successfully Updated"
       redirect_to product_review_path(@review.product)
     else
+      flash[:notice] = "Review Failed to Update"
       @product = Product.find(params[:product_id].to_i)
       render :edit
       # redirect_back fallback_location {action: show, @review}
@@ -41,6 +45,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
+    flash[:notice] = "A Review for #{@review.product.name} was Deleted"
     redirect_to product_path(@review.product)
   end
 
