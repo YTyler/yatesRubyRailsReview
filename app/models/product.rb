@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   has_many :reviews, dependent: :destroy
   validates :name, presence: true
   validates :cost, presence: true
-  validates :country, presence: true
+  validates :country_of_origin, presence: true
 
 before_save(:format_input)
 
@@ -11,8 +11,8 @@ private
     self.name = self.name.downcase
     self.name = self.name.titleize
 
-    self.country = self.country.downcase
-    self.country = self.country.titleize
+    self.country_of_origin = self.country_of_origin.downcase
+    self.country_of_origin = self.country_of_origin.titleize
 
   end
 end
