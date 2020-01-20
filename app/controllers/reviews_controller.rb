@@ -42,7 +42,9 @@ class ReviewsController < ApplicationController
     redirect_to survey_path(@review.survey)
   end
 
-private
-def review_params
-  params.require(:review).permit(:author, :content_body, :rating)
+  private
+  def review_params
+    params.require(:review).permit(:author, :content_body, :rating)
+  end
+
 end
