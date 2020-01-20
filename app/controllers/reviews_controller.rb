@@ -1,7 +1,4 @@
 class ReviewsController < ApplicationController
-  def index
-
-  end
 
   def new
     @product = Product.find(params[:product_id].to_i)
@@ -44,7 +41,7 @@ class ReviewsController < ApplicationController
     @review.destroy
     redirect_to survey_path(@review.survey)
   end
-  
+
 private
 def review_params
   params.require(:review).permit(:author, :content_body, :rating)
