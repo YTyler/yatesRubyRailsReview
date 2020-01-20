@@ -23,7 +23,6 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    binding.pry
     @product = Product.find(params[:product_id].to_i)
     @review = Review.find(params[:id])
   end
@@ -33,7 +32,9 @@ class ReviewsController < ApplicationController
     if @review.update(review_params)
       redirect_to product_review_path(@review.product)
     else
+      @product = Product.find(params[:product_id].to_i)
       render :edit
+      # redirect_back fallback_location {action: show, @review}
     end
   end
 
