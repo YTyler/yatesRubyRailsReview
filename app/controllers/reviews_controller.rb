@@ -23,6 +23,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    binding.pry
     @product = Product.find(params[:product_id].to_i)
     @review = Review.find(params[:id])
   end
@@ -30,7 +31,7 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
-      redirect_to survey_path(@review.survey)
+      redirect_to product_review_path(@review.product)
     else
       render :edit
     end
@@ -39,12 +40,12 @@ class ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to survey_path(@review.survey)
+    redirect_to product_path(@review.product)
   end
 
   private
   def review_params
-    params.require(:review).permit(:author, :content_body, :rating)
+    params.require(:review).permit(:author, :content_body, :rating, :product_id)
   end
 
 end
